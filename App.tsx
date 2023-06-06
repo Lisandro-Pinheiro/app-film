@@ -1,23 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, FlatList, ActivityIndicator } from 'react-native';
 import { CacheManager } from 'react-native-expo-image-cache';
+import { Movie } from './interface.-movie';
 
 const API_KEY = 'd597a139e2810c48a0892f8798e7d916';
 const BASE_URL = 'https://api.themoviedb.org/3';
-const POSTER_BASE_URL = 'https://api.themoviedb.org/3/movie/550';
+const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500/';
 
-interface Movie {
-  id: number;
-  backdropPath: string;
-  posterPath: string;
-  title: string;
-  originalTitle: string;
-  popularity: number;
-  voteAverage: number;
-  voteCount: number;
-  releaseDate: string;
-  overview: string;
-}
+
 
 const RenderPoster: React.FC<{ uri: string }> = ({ uri }) => {
   const [cachedPath, setCachedPath] = useState<string | null>(null);
@@ -45,9 +35,8 @@ const RenderPoster: React.FC<{ uri: string }> = ({ uri }) => {
 };
 
 const renderItem: React.FC<{ item: Movie }> = ({ item }) => {
-  const posterUrl = item.posterPath ? POSTER_BASE_URL + item.posterPath : '';
-
-
+  const posterUrl = item.backdrop_path ? POSTER_BASE_URL + item.backdrop_path : '';
+  console.log(posterUrl)
   return (
     <View style={styles.movieItem}>
       <View style={styles.posterContainer}>
@@ -55,9 +44,9 @@ const renderItem: React.FC<{ item: Movie }> = ({ item }) => {
       </View>
       <View style={styles.movieInfo}>
         <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.originalTitle}>Título Original: {item.originalTitle}</Text>
-        <Text style={styles.releaseDate}>Ano de Lançamento: {item.releaseDate}</Text>
-        <Text style={styles.voteInfo}>Média de Votos: {item.voteAverage} ({item.voteCount} votos)</Text>
+        <Text style={styles.originalTitle}>Título Original: {item.original_title}</Text>
+        <Text style={styles.releaseDate}>Ano de Lançamento: {item.release_date}</Text>
+        <Text style={styles.voteInfo}>Média de Votos: {item.vote_average} ({item.vote_count} votos)</Text>
         <Text style={styles.popularity}>Popularidade: {item.popularity}</Text>
         <Text style={styles.overview}>{item.overview}</Text>
       </View>
