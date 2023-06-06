@@ -5,7 +5,7 @@ import { Movie } from './interface.-movie';
 
 const API_KEY = 'd597a139e2810c48a0892f8798e7d916';
 const BASE_URL = 'https://api.themoviedb.org/3';
-const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500/';
+const POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 
 
